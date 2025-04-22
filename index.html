@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Apollo 13</title>
+        <link rel="stylesheet" href="styles.css">
+      </head>
+      
+      <body>
+        <div id="popup-overlay">
+          <div id="popup-content">
+            <h1>Mission Begin In</h1>
+            <p>3...2...1...</p>
+            <button id="btn">Lift off</button>
+          </div>
+        </div>
+      
+        <audio id="background-audio" loop>
+          <source src="assets/music.mp3" type="audio/mpeg">
+        </audio>
+      
+        <audio id="click-sound">
+          <source src="assets/click.mp3" type="audio/mpeg">
+        </audio>
+      
+        <header>
+          <h1 class="page-title">The Story of Apollo 13</h1>
+        </header>
+      
+        <div class="image-container">
+            <img id="mainImage" src="images/1.jpeg" alt="Image" style="width: 600px; height: 600px;" />
+        </div>
+      
+        <div class="content">
+          <p id="image-description"></p>
+        </div>
+      
+        <div class="controls">
+          <button onclick="prevImage()">Prev</button>
+          <button onclick="nextImage()">Next</button>
+        </div>
 
+      
+        <script>
+            const images = [
+            "images/1.jpeg",
+            "images/2.jpg",
+            "images/3.jpg",
+            "images/4.jpg",
+            "images/5.jpg",
+            "images/6.jpg",
+            "images/7.jpg"
+            ];
+
+            const descriptions = [
+            "On April 11, 1970, Apollo 13 launched the Saturn V for another historic moment.",
+            "On the second day the oxygen tank in the service module exploded. Now supported by back-up systems, the crew had to instead loop around the moon and return without landing.",
+            "Other than the obvious, there was one other major issue. All of the main computers were down. This meant the astronauts had to calculate everything by hand on how to re-enter the atmosphere.",
+            "The crew calculated they needed to activate engines for exactly 14 seconds for proper re-entry into Earth’s orbit and atmosphere. If missed by one second in either direction, they would either crash-land, or miss Earth entirely and likely die in space.",
+            "With limited to no communication with Houston, this meant that their survival entirely depended on a tool issued by NASA. A watch known as the Omega Speedmaster that had made it back with the crew in one piece.",
+            "Because of the importance of the moment in history, NASA awarded the rare 'Silver Snoopy' award to the company for providing the necessary tools to save the mission at hand.",
+            "The crew was able to land safely and return home to their families. The watch now resides in the 'Air and Space' museum at the Smithsonian in Washington D.C., next to the shuttle and other important pieces from other historic missions."
+            ];
+
+            let currentIndex = 0;
+            const mainImage = document.getElementById("mainImage");
+            const description = document.getElementById("image-description");
+
+            function showImage(index) {
+            mainImage.src = images[index];
+            description.textContent = descriptions[index];
+            
+            if (index === 0) {
+                mainImage.classList.add("first-image");
+            } else {
+                mainImage.classList.remove("first-image");
+            }
+            }
+
+            function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+            }
+
+            function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+            }
+
+            showImage(currentIndex);
+        </script>
+    <script src="script.js"></script>
+    </body>
+      
+</html>
